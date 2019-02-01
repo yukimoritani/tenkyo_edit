@@ -96,7 +96,7 @@ def MakeStringMember(yr,no,kno,ftype):
     no_f='%02d' % (int(no))
     mn=['1', '3', '5', '7', '9', '11']
 
-    s=unicode('<A href=\"pdf/'+yr+'_'+no_f+'/kaiho'+mn(no)+'.html\">','shift_jisx0213')
+    s=unicode('<A href=\"pdf/'+yr+'_'+no_f+'/kaiho'+mn[int(no)]+'.html\">','shift_jisx0213')
 
     tmps=unicode('<img src=\"../img/members.gif\" border=\"0\" alt=\"‰ïˆõ‚Ì•û‚Í‚±‚¿‚ç\"></A><br>\n','shift_jisx0213')
     s=s+tmps
@@ -259,8 +259,10 @@ def MakeHtmlFiles(yr,no,kno):
     # Read pdf list
     fp=open("pdf.txt", "r")
     p=fp.readlines()
-    if len(p)-3 is not len(cont)-2 :
+    #if len(p)-3 is not len(cont)-2 :
+    if len(p)-1 is not len(cont)-2 :
         print "The number of index is different from the numbr of files."
+        print len(p),len(cont)-2
         return 0
 
     #dname=yr+"_"+no
@@ -299,10 +301,11 @@ def MakeHtmlFiles(yr,no,kno):
     s0=unicode('','shift_jisx0213')
     s1=unicode('','shift_jisx0213')
     s2=unicode('','shift_jisx0213')
-    j=0
+    j=-2
     for i in cont:
         #print len(i),i
         if len(i) is 6:
+            print i
             if i[0] is not '':
                 s0=s0+MakeLineTH(i[0])
                 s1=s1+MakeLineTH(i[0])
